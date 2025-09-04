@@ -10,7 +10,7 @@ export default function Home() {
 
         <p className="mt-3 text-2xl">
           Your vote matters.
-        </p
+        </p>
 
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
           <Link href="/vote" className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600">
