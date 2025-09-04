@@ -18,20 +18,30 @@ export const metadata = {
 
 import AuthButton from './components/AuthButton'
 
+// 根版面配置：包含頂部、內容與底部
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+        {/* HEADER：頂部導覽列 */}
+        <header className="w-full flex justify-center border-b border-b-foreground/10 h-16">
           <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
             <AuthButton />
           </div>
-        </nav>
-        <main className="min-h-screen flex flex-col items-center">
+        </header>
+        {/* BODY：主要內容區塊 */}
+        <main className="flex-grow flex flex-col items-center">
           {children}
         </main>
+        {/* FOOTER：頁尾資訊 */}
+        <footer className="w-full flex justify-center border-t border-t-foreground/10 h-16">
+          <div className="w-full max-w-4xl flex justify-center items-center p-3 text-sm">
+            {/* 這裡可放置版權等資訊 */}
+            © 2024 Secure Voting System
+          </div>
+        </footer>
       </body>
     </html>
   );
