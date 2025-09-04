@@ -1,6 +1,7 @@
 'use client'
 
-import { createClientComponentClient } from '@supabase/ssr'
+// 建立 Supabase 瀏覽器端客戶端的函式
+import { createBrowserClient } from '@supabase/ssr'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -8,7 +9,8 @@ import Link from 'next/link'
 export default function AuthButton() {
   const [user, setUser] = useState(null)
   const router = useRouter()
-  const supabase = createClientComponentClient(
+  // 建立瀏覽器端的 Supabase 客戶端
+  const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   )
