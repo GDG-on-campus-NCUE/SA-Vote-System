@@ -1,14 +1,30 @@
 import { supabaseServer } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
-import { createServerComponentClient } from '@supabase/ssr'
+import { createServerClient } from '@supabase/ssr'
 
 export default async function VotePage() {
   const cookieStore = cookies()
-  const supabase = createServerComponentClient({ cookies: () => cookieStore }, {
-    supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  })
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    {
+      cookies: {
+        // 取得指定 Cookie 的值
+        get(name) {
+          return cookieStore.get(name)?.value
+        },
+        // 設定或更新 Cookie
+        set(name, value, options) {
+          cookieStore.set({ name, value, ...options })
+        },
+        // 移除指定 Cookie
+        remove(name, options) {
+          cookieStore.delete({ name, ...options })
+        },
+      },
+    }
+  )
 
   const { data: { session } } = await supabase.auth.getSession()
 
