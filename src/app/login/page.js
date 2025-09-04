@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { createClientComponentClient } from '@supabase/ssr'
+// 從 Supabase 的 SSR 套件中載入瀏覽器端客戶端的函式
+import { createBrowserClient } from '@supabase/ssr'
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
@@ -9,7 +10,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [view, setView] = useState('sign-in')
   const router = useRouter()
-  const supabase = createClientComponentClient(
+  // 建立瀏覽器端的 Supabase 客戶端
+  const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   )
